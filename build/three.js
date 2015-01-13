@@ -3501,28 +3501,27 @@ THREE.Box3.prototype = {
 	},
 
 	setFromPoints: function ( points ) {
+		if(points.length > 0)
+		{
+			var empty = 0;
+			for(var i = 0, il = points.length; i < il; i++) {
+				var point = points[i];
+				if(!isFinite(point.x) || !isFinite(point.y) || !isFinite(point.z)) {
+					continue;
+				}
 
-		if ( points.length > 0 ) {
-
-			var point = points[ 0 ];
-
-			this.min.copy( point );
-			this.max.copy( point );
-
-			for ( var i = 1, il = points.length; i < il; i ++ ) {
-
-				this.addPoint( points[ i ] )
-
+				if(empty) {
+					this.min.copy( point );
+					this.max.copy( point );
+				} else {
+					this.addPoint( point );
+				}
 			}
-
 		} else {
-
 			this.makeEmpty();
-
 		}
 
 		return this;
-
 	},
 
 	setFromCenterAndSize: function() {
@@ -5528,8 +5527,12 @@ THREE.Sphere.prototype = {
 			var maxRadiusSq = 0;
 
 			for ( var i = 0, il = points.length; i < il; i ++ ) {
+				var point = points[i];
+				if(!isFinite(point.x) || !isFinite(point.y) || !isFinite(point.z)) {
+					continue;
+				}
 
-				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( points[ i ] ) );
+				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( point ) );
 
 			}
 

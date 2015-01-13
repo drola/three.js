@@ -44,8 +44,12 @@ THREE.Sphere.prototype = {
 			var maxRadiusSq = 0;
 
 			for ( var i = 0, il = points.length; i < il; i ++ ) {
+				var point = points[i];
+				if(!isFinite(point.x) || !isFinite(point.y) || !isFinite(point.z)) {
+					continue;
+				}
 
-				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( points[ i ] ) );
+				maxRadiusSq = Math.max( maxRadiusSq, center.distanceToSquared( point ) );
 
 			}
 

@@ -1,5 +1,8 @@
 three.js
 ========
+#### Changes to original library ####
+
+Only finite vectors are taken into account when computing bounding boxes and spheres.
 
 #### JavaScript 3D library ####
 
